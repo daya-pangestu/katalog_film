@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="movie">film</string>
+    <string name="tv">televisi</string>
+    <string name="language">ganti bahasa</string>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="movie">film</string>
+    <string name="language">changer de langue</string>
+    <string name="tv">la télé</string>
+</resources>

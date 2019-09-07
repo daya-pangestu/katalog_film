@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:padding="16dp"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/itemImgPoster"
+        android:layout_width="120dp"
+        android:layout_height="160dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/itemTxtJudul"
+        app:layout_constraintHorizontal_bias="0.0"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/itemTxtJudul"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        tools:text="judul"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        android:layout_alignTop="@id/itemImgPoster"
+        android:layout_toEndOf="@id/itemImgPoster"
+        app:layout_constraintTop_toTopOf="@id/itemImgPoster"
+        app:layout_constraintStart_toEndOf="@id/itemImgPoster"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        tools:layout_editor_absoluteX="244dp"
+        tools:layout_editor_absoluteY="98dp"
+        android:layout_toRightOf="@id/itemImgPoster"
+        android:layout_marginLeft="8dp" />
+
+    <TextView
+        android:id="@+id/itemTxtDesc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
+        android:layout_marginTop="16dp"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="243dp"
+        android:maxLines="4"
+        app:layout_constraintStart_toStartOf="@id/itemTxtJudul"
+        app:layout_constraintEnd_toEndOf="@id/itemTxtJudul"
+        app:layout_constraintTop_toBottomOf="@id/itemTxtJudul"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
