@@ -11,7 +11,7 @@
         <item>Hunter Killer</item>
         <item>Mary Poppins: Return</item>
 
-        <item>Preman Pensiun</item>
+        <item>retired thug</item>
         <item>RobinHood</item>
         <item>Spider-Man: Into the Spider-Verse (2018) </item>
 
@@ -65,7 +65,7 @@
 
         <item>family guy</item>
         <item>flash</item>
-        <item>god</item>
+        <item>game of thrones</item>
 
         <item>gotham</item>
         <item>grey anathomy</item>
@@ -104,5 +104,6 @@
         <item>@drawable/poster_hanna</item>
 
     </integer-array>
+    <string name="detail">Detail</string>
 
 </resources>

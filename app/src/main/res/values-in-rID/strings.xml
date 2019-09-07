@@ -3,4 +3,5 @@
     <string name="movie">film</string>
     <string name="tv">televisi</string>
     <string name="language">ganti bahasa</string>
+    <string name="detail">Detail</string>
 </resources>

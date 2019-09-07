@@ -1,11 +1,11 @@
 package com.daya.moviekataloe.view
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.daya.moviekataloe.model.MediaModel
 import com.daya.moviekataloe.R
+import com.daya.moviekataloe.model.MediaModel
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
@@ -13,11 +13,13 @@ class DetailActivity : AppCompatActivity() {
         const val EXTRA_MOVIE = "extra_movie"
     }
 
-    private var media : MediaModel? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            title = getString(R.string.detail)
+        }
 
         val movie = intent.getParcelableExtra<MediaModel>(EXTRA_MOVIE)
 
@@ -28,10 +30,6 @@ class DetailActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        media = null
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
