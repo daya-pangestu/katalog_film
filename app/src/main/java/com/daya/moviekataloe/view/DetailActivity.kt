@@ -3,14 +3,15 @@ package com.daya.moviekataloe.view
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.daya.moviekataloe.R
-import com.daya.moviekataloe.model.MediaModel
+import com.daya.moviekataloe.view.adapter.MediaAdapter.Companion.BASE_URL_IMAGE
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
     companion object{
         const val EXTRA_MOVIE = "extra_movie"
+        const val EXTRA_TV = "extra_tv"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,13 +21,19 @@ class DetailActivity : AppCompatActivity() {
             setDisplayHomeAsUpEnabled(true)
             title = getString(R.string.detail)
         }
+        val movie: com.daya.moviekataloe.model.movie.Result? =
+            intent.getParcelableExtra(EXTRA_MOVIE)
+        val tv: com.daya.moviekataloe.model.tv.Result? = intent.getParcelableExtra(EXTRA_TV)
 
-        val movie = intent.getParcelableExtra<MediaModel>(EXTRA_MOVIE)
 
-        movie?.let {
-            detailImgPoster.setImageDrawable(ContextCompat.getDrawable(this@DetailActivity, it.poster))
-            detailTxtDesc.text = it.deskripsi
-            detailTxtJudul.text = it.judul
+        if (movie != null) {
+            detailTxtJudul.text = movie.title
+            detailTxtDesc.text = movie.overview
+            Glide.with(this).load(BASE_URL_IMAGE + movie.poster_path).into(detailImgPoster)
+        } else if (tv != null) {
+            detailTxtJudul.text = tv.name
+            detailTxtDesc.text = tv.overview
+            Glide.with(this).load(BASE_URL_IMAGE + tv.poster_path).into(detailImgPoster)
         }
     }
 

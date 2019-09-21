@@ -1,4 +1,4 @@
-package com.daya.moviekataloe.view
+package com.daya.moviekataloe.view.favorite
 
 
 import android.os.Bundle
@@ -12,16 +12,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.daya.moviekataloe.R
 import com.daya.moviekataloe.model.movie.MovieModel
 import com.daya.moviekataloe.view.adapter.MediaAdapter
-import com.daya.moviekataloe.view.adapter.MediaAdapter.Companion.TYPE_MOVIE
 import com.daya.moviekataloe.viewmodel.MediaViewModel
-import kotlinx.android.synthetic.main.fragment_movie.*
+import kotlinx.android.synthetic.main.fragment_favorite_movie.*
 
+class FavoriteMovieFragment : Fragment() {
 
-class MovieFragment : Fragment() {
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_movie, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_favorite_movie, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,17 +38,15 @@ class MovieFragment : Fragment() {
     }
 
     private fun initRecyclerview(movieModel: MovieModel) {
-        val movieAdapter = MediaAdapter(TYPE_MOVIE)
+        val movieAdapter = MediaAdapter(MediaAdapter.TYPE_MOVIE)
         movieAdapter.movieModel = movieModel
-        fMovieRecyclerview.apply {
+        fmovifavorit.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = movieAdapter
         }
-        fmovieProgressBar.visibility = View.GONE
 
 
     }
-
 
 }

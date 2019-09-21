@@ -39,7 +39,7 @@
         android:id="@+id/itemTxtDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
+        tools:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
         android:layout_marginTop="16dp"
         tools:layout_editor_absoluteX="63dp"
         tools:layout_editor_absoluteY="243dp"

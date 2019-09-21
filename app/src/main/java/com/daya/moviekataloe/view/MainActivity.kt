@@ -22,15 +22,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         when (val position = mainViewpager.currentItem) {
             0 -> setTitleToolbar(position)
             1 -> setTitleToolbar(position)
+            2 -> setTitleToolbar(position)
         }
 
         mainBtmNav.setOnNavigationItemSelectedListener(this)
 
         val viewpagerAdapter = ViewpagerAdapter(supportFragmentManager)
-        viewpagerAdapter.apply {
-            fragment.add(MovieFragment())
-            fragment.add(TvFragment())
-        }
 
         mainViewpager.apply {
             adapter = viewpagerAdapter
@@ -51,6 +48,11 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 setTitleToolbar(1)
                 true
             }
+            R.id.menu_main_favorit -> {
+                mainViewpager.currentItem = 2
+                setTitleToolbar(2)
+                true
+            }
             else -> false
         }
     }
@@ -65,6 +67,10 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             }
             1 -> {
                 mainBtmNav.selectedItemId = R.id.menu_main_tv
+                setTitleToolbar(position)
+            }
+            2 -> {
+                mainBtmNav.selectedItemId = R.id.menu_main_favorit
                 setTitleToolbar(position)
             }
         }
@@ -89,6 +95,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         when (position) {
             0 -> supportActionBar?.title = getString(R.string.movie)
             1 -> supportActionBar?.title = getString(R.string.tv)
+            2 -> supportActionBar?.title = "favorite"
         }
     }
 }
