@@ -33,6 +33,8 @@ class MovTvRoomdbRepo(application: Application) {
         }
     }
 
+    fun isMovieFavorite(id: Int): LiveData<MovieFavTable> = db.favoriteDao().isMovieFavorite(id)
+
 
     fun getAllFavoriteTv(): LiveData<List<TvFavTable>> =
         db.favoriteDao().getAllFavoriteTv()
@@ -48,5 +50,8 @@ class MovTvRoomdbRepo(application: Application) {
             db.favoriteDao().deleteFafoviteTv(favTable)
         }
     }
+
+    fun isTvFavorite(id: Int): LiveData<TvFavTable> = db.favoriteDao().isTvFavorite(id)
+
 
 }

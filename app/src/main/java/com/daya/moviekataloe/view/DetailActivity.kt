@@ -2,46 +2,156 @@ package com.daya.moviekataloe.view
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.daya.moviekataloe.R
+import com.daya.moviekataloe.repo.room.MovieFavTable
+import com.daya.moviekataloe.repo.room.TvFavTable
 import com.daya.moviekataloe.view.adapter.MediaAdapter.Companion.BASE_URL_IMAGE
+import com.daya.moviekataloe.viewmodel.FavoriteViewModel
+import com.like.LikeButton
+import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
-    companion object{
+    companion object {
         const val EXTRA_MOVIE = "extra_movie"
         const val EXTRA_TV = "extra_tv"
     }
 
+    lateinit var source: String
+
+    var movie: com.daya.moviekataloe.model.movie.Result? = null
+    var tv: com.daya.moviekataloe.model.tv.Result? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        val viewModel by lazy { ViewModelProviders.of(this).get(FavoriteViewModel::class.java) }
+
+
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             title = getString(R.string.detail)
         }
-        val movie: com.daya.moviekataloe.model.movie.Result? =
+        movie =
             intent.getParcelableExtra(EXTRA_MOVIE)
-        val tv: com.daya.moviekataloe.model.tv.Result? = intent.getParcelableExtra(EXTRA_TV)
+        tv = intent.getParcelableExtra(EXTRA_TV)
 
+        when {
+            movie != null -> {
+                detailTxtJudul.text = movie?.title
+                detailTxtDesc.text = movie?.overview
+                Glide.with(this).load(BASE_URL_IMAGE + movie?.poster_path).into(detailImgPoster)
+                source = EXTRA_MOVIE
 
-        if (movie != null) {
-            detailTxtJudul.text = movie.title
-            detailTxtDesc.text = movie.overview
-            Glide.with(this).load(BASE_URL_IMAGE + movie.poster_path).into(detailImgPoster)
-        } else if (tv != null) {
-            detailTxtJudul.text = tv.name
-            detailTxtDesc.text = tv.overview
-            Glide.with(this).load(BASE_URL_IMAGE + tv.poster_path).into(detailImgPoster)
+            }
+            tv != null -> {
+                detailTxtJudul.text = tv?.name
+                detailTxtDesc.text = tv?.overview
+                Glide.with(this).load(BASE_URL_IMAGE + tv?.poster_path).into(detailImgPoster)
+                source = EXTRA_TV
+            }
+        }
+
+        when (source) {
+            EXTRA_MOVIE -> {
+
+                viewModel.isMovieFavorite(movie?.id!!).observe(this, Observer {
+                    detailFavMov.isLiked = it != null
+                })
+
+                detailFavMov.setOnLikeListener(object : OnLikeListener {
+                    override fun liked(likeButton: LikeButton?) {
+                        movie?.let {
+                            viewModel.addFavoriteMovie(
+                                MovieFavTable(
+                                    id = it.id,
+                                    title = it.title,
+                                    description = it.overview,
+                                    imageLink = it.poster_path
+                                )
+                            )
+                            toastDetail(it.title, true)
+                        }
+                    }
+
+                    override fun unLiked(likeButton: LikeButton?) {
+                        movie?.let {
+                            viewModel.deleteFavoriteMovie(
+                                MovieFavTable(
+                                    id = it.id,
+                                    title = it.title,
+                                    description = it.overview,
+                                    imageLink = it.poster_path
+                                )
+                            )
+                            toastDetail(it.title, false)
+                        }
+                    }
+                })
+            }
+            EXTRA_TV -> {
+
+                viewModel.isTvFavorite(tv?.id!!).observe(this, Observer {
+                    detailFavMov.isLiked = it != null
+                })
+
+                detailFavMov.setOnLikeListener(object : OnLikeListener {
+                    override fun liked(likeButton: LikeButton?) {
+                        tv?.let {
+                            viewModel.addFavoriteTv(
+                                TvFavTable(
+                                    id = it.id,
+                                    title = it.name,
+                                    description = it.overview,
+                                    imageLink = it.poster_path
+                                )
+                            )
+                            toastDetail(it.name, true)
+                        }
+                    }
+
+                    override fun unLiked(likeButton: LikeButton?) {
+                        tv?.let {
+                            viewModel.deleteFavoriteTv(
+                                TvFavTable(
+                                    id = it.id,
+                                    title = it.name,
+                                    description = it.overview,
+                                    imageLink = it.poster_path
+                                )
+                            )
+                            toastDetail(it.name, false)
+                        }
+                    }
+                })
+            }
         }
     }
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun toastDetail(text: String, setLiked: Boolean) {
+        when (setLiked) {
+            true -> Toast.makeText(
+                this@DetailActivity,
+                "$text added to favorite",
+                Toast.LENGTH_SHORT
+            ).show()
+            false -> Toast.makeText(
+                this@DetailActivity,
+                "$text removed from favorite",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
     }
 }

@@ -18,6 +18,9 @@ interface FavoriteDao {
     @Delete
     fun deleteFafoviteMovie(movieFav: MovieFavTable)
 
+    @Query("SELECT * FROM MovieFavTable WHERE id = :id ")
+    fun isMovieFavorite(id: Int): LiveData<MovieFavTable>
+
 
     @Query("SELECT * FROM TvFavTable")
     fun getAllFavoriteTv(): LiveData<List<TvFavTable>>
@@ -28,4 +31,6 @@ interface FavoriteDao {
     @Delete
     fun deleteFafoviteTv(tvFav: TvFavTable)
 
+    @Query("SELECT * FROM TvFavTable WHERE id = :id ")
+    fun isTvFavorite(id: Int): LiveData<TvFavTable>
 }

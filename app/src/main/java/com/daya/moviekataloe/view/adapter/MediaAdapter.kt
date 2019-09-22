@@ -3,6 +3,7 @@ package com.daya.moviekataloe.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.daya.moviekataloe.R
@@ -86,7 +87,15 @@ class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapte
             itemTxtDesc.text = result.overview
 
             itemView.setOnClickListener { view ->
-                view.context.startActivity<DetailActivity>(EXTRA_TV to result)
+                if (result.poster_path.isEmpty() || result.name.isEmpty() || result.overview.isEmpty()) {
+                    Toast.makeText(
+                        view.context.applicationContext, "data error try another",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                } else {
+                    view.context.startActivity<DetailActivity>(EXTRA_TV to result)
+                }
             }
         }
     }

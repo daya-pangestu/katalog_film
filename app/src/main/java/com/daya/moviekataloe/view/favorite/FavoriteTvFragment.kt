@@ -24,7 +24,6 @@ class FavoriteTvFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_favorite_tv, container, false)
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

@@ -32,4 +32,7 @@ class FavoriteViewModel(application: Application) : AndroidViewModel(application
         roomDb.deleteFavoriteTv(favTable)
     }
 
+    fun isMovieFavorite(id: Int): LiveData<MovieFavTable> = roomDb.isMovieFavorite(id)
+
+    fun isTvFavorite(id: Int): LiveData<TvFavTable> = roomDb.isTvFavorite(id)
 }

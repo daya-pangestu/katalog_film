@@ -34,6 +34,8 @@ class MovieFragment : Fragment() {
                 initRecyclerview(it)
             }
         })
+
+
     }
 
     private fun initRecyclerview(movieModel: MovieModel) {

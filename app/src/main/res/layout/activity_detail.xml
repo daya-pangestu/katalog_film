@@ -4,47 +4,65 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="8dp"
+    android:padding="16dp"
     tools:context=".view.DetailActivity">
 
     <ImageView
         android:id="@+id/detailImgPoster"
         android:layout_width="120dp"
         android:layout_height="160dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="@id/detailTxtJudul"
         app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/detailTxtJudul"
-        android:layout_width="0dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:text="judul"
-        android:textStyle="bold"
-        android:layout_alignTop="@id/detailImgPoster"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
         android:layout_toEndOf="@id/detailImgPoster"
-        app:layout_constraintTop_toBottomOf="@id/detailImgPoster"
-        app:layout_constraintStart_toStartOf="@id/detailImgPoster"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        tools:layout_editor_absoluteX="244dp"
-        tools:layout_editor_absoluteY="98dp"
-        android:layout_toRightOf="@id/detailImgPoster" />
+        android:layout_toRightOf="@id/detailImgPoster"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/detailFavMov"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/detailImgPoster"
+        app:layout_constraintTop_toTopOf="@+id/detailImgPoster"
+        tools:text="judul" />
 
     <TextView
         android:id="@+id/detailTxtDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
-        android:layout_marginTop="16dp"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="243dp"
         android:maxLines="4"
-        app:layout_constraintStart_toStartOf="@id/detailTxtJudul"
-        app:layout_constraintEnd_toEndOf="@id/detailTxtJudul"
-        app:layout_constraintTop_toBottomOf="@id/detailTxtJudul"
-        />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/detailFavMov"
+        app:layout_constraintStart_toStartOf="@+id/detailImgPoster"
+        app:layout_constraintTop_toBottomOf="@+id/detailImgPoster"
+        app:layout_constraintVertical_bias="0.1"
+        tools:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView" />
+
+    <com.like.LikeButton
+        android:id="@+id/detailFavMov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginLeft="32dp"
+        app:anim_scale_factor="2.5"
+        app:circle_end_color="@color/colorAccent"
+        app:circle_start_color="@color/colorAccent"
+        app:dots_primary_color="@color/colorAccent"
+        app:dots_secondary_color="@color/colorAccent"
+        app:icon_size="36dp"
+        app:icon_type="Star"
+        app:layout_constraintBottom_toBottomOf="@+id/detailTxtJudul"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/detailTxtJudul"
+        app:layout_constraintTop_toTopOf="@+id/detailTxtJudul" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

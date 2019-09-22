@@ -1,6 +1,11 @@
 package com.daya.moviekataloe.repo.room
 
 import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
-data class TvFavTable(val title: String, val description: String, val imageLink: String)
+data class TvFavTable(
+    @PrimaryKey val id: Int, val title: String,
+    val description: String,
+    val imageLink: String
+)
