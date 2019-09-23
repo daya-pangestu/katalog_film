@@ -9,9 +9,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.daya.moviekataloe.R
-import com.daya.moviekataloe.model.movie.MovieModel
+import com.daya.moviekataloe.repo.room.TvFavTable
 import com.daya.moviekataloe.view.adapter.MediaAdapter
-import com.daya.moviekataloe.viewmodel.MediaViewModel
+import com.daya.moviekataloe.viewmodel.FavoriteViewModel
 import kotlinx.android.synthetic.main.fragment_favorite_tv.*
 
 class FavoriteTvFragment : Fragment() {
@@ -28,18 +28,28 @@ class FavoriteTvFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        val movieVModel = ViewModelProviders.of(activity!!).get(MediaViewModel::class.java)
+        val movieVModel by lazy {
+            ViewModelProviders.of(activity!!).get(FavoriteViewModel::class.java)
+        }
 
-        movieVModel.getMovie().observe(viewLifecycleOwner, Observer {
+        movieVModel.getAllFavoriteTv().observe(viewLifecycleOwner, Observer {
             if (it != null) {
-                initRecyclerview(it)
+                if (it.isNotEmpty()) {
+                    initRecyclerView(it)
+                    fFavoriteTvEmpty.visibility = View.GONE
+                } else {
+                    initRecyclerView(it)
+                    fFavoriteTvEmpty.visibility = View.VISIBLE
+                }
+            } else {
+                fFavoriteTvEmpty.visibility = View.VISIBLE
             }
         })
     }
 
-    private fun initRecyclerview(movieModel: MovieModel) {
-        val movieAdapter = MediaAdapter(MediaAdapter.TYPE_MOVIE)
-        movieAdapter.movieModel = movieModel
+    private fun initRecyclerView(movieModel: List<TvFavTable>) {
+        val movieAdapter = MediaAdapter(MediaAdapter.TYPE_FAV_TV)
+        movieAdapter.tvFavModel = movieModel
         ffavoritTv.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)

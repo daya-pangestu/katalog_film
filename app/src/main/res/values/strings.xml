@@ -10,6 +10,8 @@
     <string name="favorite">favorite</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="this_favorite_still_empty">this favorite still empty</string>
+    <string name="title_tab">movie favorite</string>
+    <string name="tv_favorite">tv favorite</string>
 
 </resources>

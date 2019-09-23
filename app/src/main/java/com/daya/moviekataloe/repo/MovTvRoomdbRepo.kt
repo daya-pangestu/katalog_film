@@ -23,35 +23,33 @@ class MovTvRoomdbRepo(application: Application) {
 
     fun addFavoriteMovie(favTable: MovieFavTable) {
         singleExecuter.execute {
-            db.favoriteDao().addFafoviteMovie(favTable)
+            db.favoriteDao().addFavoriteMovie(favTable)
         }
     }
 
     fun deleteFavoriteMovie(favTable: MovieFavTable) {
         singleExecuter.execute {
-            db.favoriteDao().deleteFafoviteMovie(favTable)
+            db.favoriteDao().deleteFavoriteMovie(favTable)
         }
     }
 
     fun isMovieFavorite(id: Int): LiveData<MovieFavTable> = db.favoriteDao().isMovieFavorite(id)
 
 
-    fun getAllFavoriteTv(): LiveData<List<TvFavTable>> =
-        db.favoriteDao().getAllFavoriteTv()
+    fun getAllFavoriteTv() = db.favoriteDao().getAllFavTv()
+
 
     fun addFavoriteTv(favTable: TvFavTable) {
         singleExecuter.execute {
-            db.favoriteDao().addFafoviteTv(favTable)
+            db.favoriteDao().addFavoriteTv(favTable)
         }
     }
 
     fun deleteFavoriteTv(favTable: TvFavTable) {
         singleExecuter.execute {
-            db.favoriteDao().deleteFafoviteTv(favTable)
+            db.favoriteDao().deleteFavoriteTv(favTable)
         }
     }
 
     fun isTvFavorite(id: Int): LiveData<TvFavTable> = db.favoriteDao().isTvFavorite(id)
-
-
 }

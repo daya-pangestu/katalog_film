@@ -4,4 +4,8 @@
     <string name="tv">televisi</string>
     <string name="language">ganti bahasa</string>
     <string name="detail">Detail</string>
+    <string name="favorite">favorit</string>
+    <string name="this_favorite_still_empty">favorit ini masih kosong</string>
+    <string name="title_tab">film favorit</string>
+    <string name="tv_favorite">tv favorit</string>
 </resources>

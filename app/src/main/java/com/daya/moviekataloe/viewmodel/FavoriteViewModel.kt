@@ -10,8 +10,7 @@ import com.daya.moviekataloe.repo.room.TvFavTable
 class FavoriteViewModel(application: Application) : AndroidViewModel(application) {
     private val roomDb = MovTvRoomdbRepo(application)
 
-    fun getAllFavoriteMovie(): LiveData<List<MovieFavTable>> =
-        roomDb.getAllFavoriteMovie()
+    fun getAllFavoriteMovie() = roomDb.getAllFavoriteMovie()
 
     fun addFavoriteMovie(favTable: MovieFavTable) {
         roomDb.addFavoriteMovie(favTable)
@@ -21,8 +20,10 @@ class FavoriteViewModel(application: Application) : AndroidViewModel(application
         roomDb.deleteFavoriteMovie(favTable)
     }
 
-    fun getAllFavoriteTv(): LiveData<List<TvFavTable>> =
-        roomDb.getAllFavoriteTv()
+    fun isMovieFavorite(id: Int): LiveData<MovieFavTable> = roomDb.isMovieFavorite(id)
+
+
+    fun getAllFavoriteTv() = roomDb.getAllFavoriteTv()
 
     fun addFavoriteTv(favTable: TvFavTable) {
         roomDb.addFavoriteTv(favTable)
@@ -32,7 +33,7 @@ class FavoriteViewModel(application: Application) : AndroidViewModel(application
         roomDb.deleteFavoriteTv(favTable)
     }
 
-    fun isMovieFavorite(id: Int): LiveData<MovieFavTable> = roomDb.isMovieFavorite(id)
-
     fun isTvFavorite(id: Int): LiveData<TvFavTable> = roomDb.isTvFavorite(id)
+
+
 }

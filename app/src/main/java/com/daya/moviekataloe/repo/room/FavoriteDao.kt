@@ -13,24 +13,30 @@ interface FavoriteDao {
     fun getAllFavoriteMovie(): LiveData<List<MovieFavTable>>
 
     @Insert
-    fun addFafoviteMovie(movieFav: MovieFavTable)
+    fun addFavoriteMovie(movieFav: MovieFavTable)
 
     @Delete
-    fun deleteFafoviteMovie(movieFav: MovieFavTable)
+    fun deleteFavoriteMovie(movieFav: MovieFavTable)
 
     @Query("SELECT * FROM MovieFavTable WHERE id = :id ")
     fun isMovieFavorite(id: Int): LiveData<MovieFavTable>
 
+    @Query("SELECT * FROM MovieFavTable")
+    fun getAllFavMovie(): LiveData<List<MovieFavTable>>
 
     @Query("SELECT * FROM TvFavTable")
     fun getAllFavoriteTv(): LiveData<List<TvFavTable>>
 
     @Insert
-    fun addFafoviteTv(tvFav: TvFavTable)
+    fun addFavoriteTv(tvFav: TvFavTable)
 
     @Delete
-    fun deleteFafoviteTv(tvFav: TvFavTable)
+    fun deleteFavoriteTv(tvFav: TvFavTable)
 
     @Query("SELECT * FROM TvFavTable WHERE id = :id ")
     fun isTvFavorite(id: Int): LiveData<TvFavTable>
+
+    @Query("SELECT * FROM TvFavTable")
+    fun getAllFavTv(): LiveData<List<TvFavTable>>
+
 }

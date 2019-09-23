@@ -10,5 +10,4 @@ class MediaViewModel : ViewModel() {
 
     fun getTv() = networkRepo.getTv()
 
-
 }

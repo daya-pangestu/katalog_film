@@ -20,12 +20,13 @@ class DetailActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_MOVIE = "extra_movie"
         const val EXTRA_TV = "extra_tv"
+
     }
 
-    lateinit var source: String
+    private lateinit var source: String
 
-    var movie: com.daya.moviekataloe.model.movie.Result? = null
-    var tv: com.daya.moviekataloe.model.tv.Result? = null
+    var movie: MovieFavTable? = null
+    var tv: TvFavTable? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,15 +45,15 @@ class DetailActivity : AppCompatActivity() {
         when {
             movie != null -> {
                 detailTxtJudul.text = movie?.title
-                detailTxtDesc.text = movie?.overview
-                Glide.with(this).load(BASE_URL_IMAGE + movie?.poster_path).into(detailImgPoster)
+                detailTxtDesc.text = movie?.description
+                Glide.with(this).load(BASE_URL_IMAGE + movie?.imageLink).into(detailImgPoster)
                 source = EXTRA_MOVIE
 
             }
             tv != null -> {
-                detailTxtJudul.text = tv?.name
-                detailTxtDesc.text = tv?.overview
-                Glide.with(this).load(BASE_URL_IMAGE + tv?.poster_path).into(detailImgPoster)
+                detailTxtJudul.text = tv?.title
+                detailTxtDesc.text = tv?.description
+                Glide.with(this).load(BASE_URL_IMAGE + tv?.imageLink).into(detailImgPoster)
                 source = EXTRA_TV
             }
         }
@@ -67,28 +68,14 @@ class DetailActivity : AppCompatActivity() {
                 detailFavMov.setOnLikeListener(object : OnLikeListener {
                     override fun liked(likeButton: LikeButton?) {
                         movie?.let {
-                            viewModel.addFavoriteMovie(
-                                MovieFavTable(
-                                    id = it.id,
-                                    title = it.title,
-                                    description = it.overview,
-                                    imageLink = it.poster_path
-                                )
-                            )
+                            viewModel.addFavoriteMovie(it)
                             toastDetail(it.title, true)
                         }
                     }
 
                     override fun unLiked(likeButton: LikeButton?) {
                         movie?.let {
-                            viewModel.deleteFavoriteMovie(
-                                MovieFavTable(
-                                    id = it.id,
-                                    title = it.title,
-                                    description = it.overview,
-                                    imageLink = it.poster_path
-                                )
-                            )
+                            viewModel.deleteFavoriteMovie(it)
                             toastDetail(it.title, false)
                         }
                     }
@@ -103,29 +90,15 @@ class DetailActivity : AppCompatActivity() {
                 detailFavMov.setOnLikeListener(object : OnLikeListener {
                     override fun liked(likeButton: LikeButton?) {
                         tv?.let {
-                            viewModel.addFavoriteTv(
-                                TvFavTable(
-                                    id = it.id,
-                                    title = it.name,
-                                    description = it.overview,
-                                    imageLink = it.poster_path
-                                )
-                            )
-                            toastDetail(it.name, true)
+                            viewModel.addFavoriteTv(it)
+                            toastDetail(it.title, true)
                         }
                     }
 
                     override fun unLiked(likeButton: LikeButton?) {
                         tv?.let {
-                            viewModel.deleteFavoriteTv(
-                                TvFavTable(
-                                    id = it.id,
-                                    title = it.name,
-                                    description = it.overview,
-                                    imageLink = it.poster_path
-                                )
-                            )
-                            toastDetail(it.name, false)
+                            viewModel.deleteFavoriteTv(it)
+                            toastDetail(it.title, false)
                         }
                     }
                 })

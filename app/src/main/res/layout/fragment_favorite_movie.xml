@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,16 +8,19 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/fmovifavorit"
+        android:id="@+id/fmovieFavorite"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/item_movie"
+        tools:listitem="@layout/item_movie" />
 
-        />
+    <include
+        android:id="@+id/fFavoriteMovieEmpty"
+        layout="@layout/layout_empty"
+        android:visibility="gone" />
 
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

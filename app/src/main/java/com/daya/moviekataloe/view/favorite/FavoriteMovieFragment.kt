@@ -10,9 +10,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.daya.moviekataloe.R
-import com.daya.moviekataloe.model.movie.MovieModel
+import com.daya.moviekataloe.repo.room.MovieFavTable
 import com.daya.moviekataloe.view.adapter.MediaAdapter
-import com.daya.moviekataloe.viewmodel.MediaViewModel
+import com.daya.moviekataloe.viewmodel.FavoriteViewModel
 import kotlinx.android.synthetic.main.fragment_favorite_movie.*
 
 class FavoriteMovieFragment : Fragment() {
@@ -28,19 +28,31 @@ class FavoriteMovieFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val movieVModel = ViewModelProviders.of(activity!!).get(MediaViewModel::class.java)
+        val movieVModel by lazy {
+            ViewModelProviders.of(activity!!).get(FavoriteViewModel::class.java)
+        }
 
-        movieVModel.getMovie().observe(viewLifecycleOwner, Observer {
+        movieVModel.getAllFavoriteMovie().observe(viewLifecycleOwner, Observer {
             if (it != null) {
-                initRecyclerview(it)
+                if (it.isNotEmpty()) {
+                    initRecyclerView(it)
+                    fFavoriteMovieEmpty.visibility = View.GONE
+                } else {
+                    initRecyclerView(it)
+                    fFavoriteMovieEmpty.visibility = View.VISIBLE
+                }
+            } else {
+                fFavoriteMovieEmpty.visibility = View.VISIBLE
             }
+
         })
+
     }
 
-    private fun initRecyclerview(movieModel: MovieModel) {
-        val movieAdapter = MediaAdapter(MediaAdapter.TYPE_MOVIE)
-        movieAdapter.movieModel = movieModel
-        fmovifavorit.apply {
+    private fun initRecyclerView(movieModel: List<MovieFavTable>) {
+        val movieAdapter = MediaAdapter(MediaAdapter.TYPE_FAV_MOVIE)
+        movieAdapter.movFavModel = movieModel
+        fmovieFavorite.apply {
             layoutManager = LinearLayoutManager(context)
             setHasFixedSize(true)
             adapter = movieAdapter

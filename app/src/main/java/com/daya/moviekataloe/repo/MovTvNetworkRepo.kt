@@ -40,7 +40,7 @@ class MovTvNetworkRepo {
     fun getMovie() = listMovieLiveData
 
 
-    fun setTv() {
+    private fun setTv() {
         getListTvService.enqueue(object : Callback<TvModel> {
 
             override fun onResponse(call: Call<TvModel>, response: Response<TvModel>) {

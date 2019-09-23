@@ -26,9 +26,5 @@ abstract class FavoriteDatabase : RoomDatabase() {
             return INSTANCE
         }
 
-        fun destroyInstance() {
-            INSTANCE = null
-        }
-
     }
 }

@@ -4,4 +4,8 @@
     <string name="language">changer de langue</string>
     <string name="tv">la télé</string>
     <string name="detail">Les détails</string>
+    <string name="favorite">favori</string>
+    <string name="this_favorite_still_empty">Ce favori est encore vide</string>
+    <string name="tv_favorite">"télévision préférée "</string>
+    <string name="title_tab">film préféré</string>
 </resources>

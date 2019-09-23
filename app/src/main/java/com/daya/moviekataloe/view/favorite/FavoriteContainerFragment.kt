@@ -9,7 +9,7 @@ import com.daya.moviekataloe.R
 import com.daya.moviekataloe.view.adapter.FavoriteAdapter
 import kotlinx.android.synthetic.main.fragment_favorite_conteiner.*
 
-class FavoriteConteinerFragment : Fragment() {
+class FavoriteContainerFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -21,12 +21,13 @@ class FavoriteConteinerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val fragmentAdapter = FavoriteAdapter(
+            view.context,
+            childFragmentManager,
+            arrayListOf(FavoriteMovieFragment(), FavoriteTvFragment())
+        )
+        fFavoriteViewPager.adapter = fragmentAdapter
+        toolbar.setViewPager(fFavoriteViewPager)
 
-        val fragmentAdapter = fragmentManager?.let { FavoriteAdapter(it) }
-
-        fFavoritViewPager.adapter = fragmentAdapter
-        fFavoritTabLayout.setupWithViewPager(fFavoritViewPager)
     }
-
-
 }

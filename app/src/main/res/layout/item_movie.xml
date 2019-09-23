@@ -1,53 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:padding="16dp"
-    android:layout_height="wrap_content">
+    android:orientation="vertical"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardElevation="2dp"
+
+    app:cardUseCompatPadding="true">
 
 
-    <ImageView
-        android:id="@+id/itemImgPoster"
-        android:layout_width="120dp"
-        android:layout_height="160dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/itemTxtJudul"
-        app:layout_constraintHorizontal_bias="0.0"
-        tools:srcCompat="@tools:sample/avatars" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/itemTxtJudul"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:text="judul"
-        android:textStyle="bold"
-        android:layout_marginStart="8dp"
-        android:layout_alignTop="@id/itemImgPoster"
-        android:layout_toEndOf="@id/itemImgPoster"
-        app:layout_constraintTop_toTopOf="@id/itemImgPoster"
-        app:layout_constraintStart_toEndOf="@id/itemImgPoster"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.4"
-        tools:layout_editor_absoluteX="244dp"
-        tools:layout_editor_absoluteY="98dp"
-        android:layout_toRightOf="@id/itemImgPoster"
-        android:layout_marginLeft="8dp" />
+        <ImageView
+            android:id="@+id/itemImgPoster"
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            app:layout_constraintEnd_toEndOf="@id/itemTxtJudul"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/itemTxtDesc"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        tools:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
-        android:layout_marginTop="16dp"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="243dp"
-        android:maxLines="4"
-        app:layout_constraintStart_toStartOf="@id/itemTxtJudul"
-        app:layout_constraintEnd_toEndOf="@id/itemTxtJudul"
-        app:layout_constraintTop_toBottomOf="@id/itemTxtJudul"
-        />
+        <TextView
+            android:id="@+id/itemTxtJudul"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@id/itemImgPoster"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_toEndOf="@id/itemImgPoster"
+            android:layout_toRightOf="@id/itemImgPoster"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toEndOf="@id/itemImgPoster"
+            app:layout_constraintTop_toTopOf="@id/itemImgPoster"
+            tools:layout_editor_absoluteX="244dp"
+            tools:layout_editor_absoluteY="98dp"
+            tools:text="judul" />
+
+        <TextView
+            android:id="@+id/itemTxtDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:maxLines="4"
+            app:layout_constraintEnd_toEndOf="@id/itemTxtJudul"
+            app:layout_constraintStart_toStartOf="@id/itemTxtJudul"
+            app:layout_constraintTop_toBottomOf="@id/itemTxtJudul"
+            tools:layout_editor_absoluteX="63dp"
+            tools:layout_editor_absoluteY="243dp"
+            tools:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:background="@android:color/transparent"
+            android:text="@string/detail"
+            android:textColor="@color/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/itemTxtDesc" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
