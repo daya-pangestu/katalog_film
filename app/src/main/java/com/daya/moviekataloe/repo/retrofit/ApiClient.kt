@@ -10,7 +10,6 @@ class ApiClient {
         private var retrofit: Retrofit? = null
 
         fun getRetrofitClient(): Retrofit? {
-
             return if (retrofit == null) {
                 Retrofit.Builder()
                     .baseUrl(BASE_URL)

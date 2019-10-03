@@ -10,6 +10,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class MovTvNetworkRepo {
+
     private val service: ApiService by lazy { ApiClient.getRetrofitClient()!!.create(ApiService::class.java) }
     private val getListmovieService by lazy { service.getListMovie() }
     private val getListTvService by lazy { service.getListTv() }

@@ -3,7 +3,6 @@ package com.daya.moviekataloe.view.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.daya.moviekataloe.R
@@ -93,10 +92,7 @@ class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapte
                     .into(itemImgPoster)
             }
 
-            itemTxtJudul.text = result.title
-            itemTxtDesc.text = result.overview
-
-            itemView.setOnClickListener { view ->
+            fun intentContent(view: View) {
                 view.context.startActivity<DetailActivity>(
                     EXTRA_MOVIE to MovieFavTable(
                         result.id,
@@ -105,6 +101,17 @@ class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapte
                         result.poster_path
                     )
                 )
+            }
+
+            itemTxtJudul.text = result.title
+            itemTxtDesc.text = result.overview
+
+            itemView.setOnClickListener {
+                intentContent(it)
+            }
+
+            itemBtnDetail.setOnClickListener {
+                intentContent(it)
             }
         }
 
@@ -118,24 +125,25 @@ class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapte
             itemTxtJudul.text = result.name
             itemTxtDesc.text = result.overview
 
-            itemView.setOnClickListener { view ->
-                if (result.poster_path.isEmpty() || result.name.isEmpty() || result.overview.isEmpty()) {
-                    Toast.makeText(
-                        view.context.applicationContext, "data error try another",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                } else {
-                    view.context.startActivity<DetailActivity>(
-                        EXTRA_TV to TvFavTable(
-                            result.id,
-                            result.name,
-                            result.overview,
-                            result.poster_path
-                        )
+            fun intentCOntent(view: View) {
+                view.context.startActivity<DetailActivity>(
+                    EXTRA_TV to TvFavTable(
+                        result.id,
+                        result.name,
+                        result.overview,
+                        result.poster_path
                     )
-                }
+                )
             }
+
+            itemView.setOnClickListener { view ->
+                intentCOntent(view)
+            }
+
+            itemBtnDetail.setOnClickListener { view ->
+                intentCOntent(view)
+            }
+
         }
 
         fun bindFavMovie(movie: MovieFavTable) {
@@ -147,8 +155,15 @@ class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapte
                 itemTxtJudul.text = movie.title
                 itemTxtDesc.text = movie.description
 
-                itemView.setOnClickListener { view ->
+                fun intentContent(view: View) {
                     view.context.startActivity<DetailActivity>(EXTRA_MOVIE to movie)
+                }
+
+                itemView.setOnClickListener { view ->
+                    intentContent(view)
+                }
+                itemBtnDetail.setOnClickListener { view ->
+                    intentContent(view)
                 }
             }
 
@@ -163,8 +178,18 @@ class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapte
                 itemTxtJudul.text = tv.title
                 itemTxtDesc.text = tv.description
 
-                itemView.setOnClickListener { view ->
+
+                fun intentContent(view: View) {
                     view.context.startActivity<DetailActivity>(EXTRA_TV to tv)
+
+                }
+
+                itemView.setOnClickListener { view ->
+                    intentContent(view)
+                }
+
+                itemBtnDetail.setOnClickListener { view ->
+                    intentContent(view)
                 }
             }
         }

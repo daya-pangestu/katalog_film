@@ -31,8 +31,6 @@ androidExtensions {
 dependencies {
     implementation "com.google.android.material:material:1.1.0-alpha10"
 
-    implementation 'com.github.bumptech.glide:glide:4.9.0'
-    kapt 'com.github.bumptech.glide:compiler:4.9.0'
 
     implementation "org.jetbrains.anko:anko:0.10.8"
 
@@ -42,7 +40,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
-    def glide_version = "4.9.0"
+    def glide_version = "4.10.0"
     implementation "com.github.bumptech.glide:glide:$glide_version"
     kapt "com.github.bumptech.glide:compiler:$glide_version"
 

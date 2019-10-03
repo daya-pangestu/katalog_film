@@ -55,8 +55,6 @@ class FavoriteTvFragment : Fragment() {
             setHasFixedSize(true)
             adapter = movieAdapter
         }
-
-
     }
 
 }
