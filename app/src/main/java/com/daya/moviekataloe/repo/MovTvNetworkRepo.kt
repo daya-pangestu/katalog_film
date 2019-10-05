@@ -40,7 +40,6 @@ class MovTvNetworkRepo {
 
     fun getMovie() = listMovieLiveData
 
-
     private fun setTv() {
         getListTvService.enqueue(object : Callback<TvModel> {
 
@@ -56,4 +55,39 @@ class MovTvNetworkRepo {
     }
 
     fun getTv() = listTvLiveData
+
+
+    fun getMovieBysearch(query: String): MutableLiveData<MovieModel> {
+        val liveDataListMovie = MutableLiveData<MovieModel>()
+        service.getSearchMovie(query = query).enqueue(object : Callback<MovieModel> {
+            override fun onResponse(call: Call<MovieModel>, response: Response<MovieModel>) {
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    liveDataListMovie.value = body
+                }
+            }
+
+            override fun onFailure(call: Call<MovieModel>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+        return liveDataListMovie
+    }
+
+    fun getTvBySearch(query: String): MutableLiveData<TvModel> {
+        val liveDataListTv = MutableLiveData<TvModel>()
+        service.getSearchTv(query = query).enqueue(object : Callback<TvModel> {
+            override fun onResponse(call: Call<TvModel>, response: Response<TvModel>) {
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    liveDataListTv.value = body
+                }
+            }
+
+            override fun onFailure(call: Call<TvModel>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+        return liveDataListTv
+    }
 }

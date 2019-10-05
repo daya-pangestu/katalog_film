@@ -17,6 +17,7 @@ import kotlinx.android.extensions.LayoutContainer
 import kotlinx.android.synthetic.main.item_movie.*
 import org.jetbrains.anko.startActivity
 
+
 class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapter.ItemHolder>() {
 
 
@@ -79,6 +80,12 @@ class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapte
             }
             else -> 0
         }
+    }
+
+    fun clear() {
+        if (movieModel != null) movieModel = null
+        else tvModel = null
+        notifyItemRangeRemoved(0, itemCount)
     }
 
     inner class ItemHolder(override val containerView: View?) :

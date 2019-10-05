@@ -18,4 +18,20 @@ interface ApiService {
     @GET("tv")
     fun getListTv(@Query("api_key") api_key: String = API_KEY, @Query("language") language: String = LANGUAGE): Call<TvModel>
 
+
+    @GET("movie")
+    fun getSearchMovie(
+        @Query("api_key") api_key: String = API_KEY, @Query("language") language: String = LANGUAGE, @Query(
+            "query"
+        ) query: String
+    ): Call<MovieModel> //TODO kayaknya si call nya gini
+
+
+    @GET("tv")
+    fun getSearchTv(
+        @Query("api_key") api_key: String = API_KEY, @Query("language") language: String = LANGUAGE, @Query(
+            "query"
+        ) query: String
+    ): Call<TvModel> //TODO kayaknya si call nya gini
+
 }

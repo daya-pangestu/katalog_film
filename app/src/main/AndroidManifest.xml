@@ -21,6 +21,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".view.settings.SettingsActivity"></activity>
+
+        <receiver android:name=".widget.StackWidgetMovie">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/stack_widget_movie_info" />
+        </receiver>
+
+        <activity
+            android:name=".view.search.SearchActivity"
+            android:theme="@style/searchTheme" />
         <activity android:name=".view.DetailActivity" />
         <activity android:name=".view.MainActivity">
             <intent-filter>
@@ -36,6 +51,20 @@
             android:exported="true"
             android:readPermission="com.daya.moviekataloe.READ_DATABASE"
             android:writePermission="com.daya.moviekataloe.WRITE_DATABASE" />
+
+        <receiver android:name=".widget.StackWidgetMovie">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/stack_widget_movie_info" />
+        </receiver>
+
+        <service
+            android:name=".widget.StackWidgetMovieService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
     </application>
 
 </manifest>

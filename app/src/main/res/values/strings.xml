@@ -9,9 +9,25 @@
     <string name="detail">Detail</string>
     <string name="favorite">favorite</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="this_favorite_still_empty">this favorite still empty</string>
     <string name="title_tab">movie favorite</string>
     <string name="tv_favorite">tv favorite</string>
+    <string name="search_hint_movie">Search Movie</string>
+    <string name="search_hint_tv">Search Tv</string>
+    <string name="hint_search_toast_movie">Search by movie</string>
+    <string name="hint_search_toast_tv">Search by tv</string>
+    <string name="dialog_filter_search_title">what are you looking for?</string>
+
+    <string-array name="array_choose_search_type">
+        <item>Search By Movie</item>
+        <item>Search By Tv</item>
+    </string-array>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="setting">Setting</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

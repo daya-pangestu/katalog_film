@@ -47,8 +47,6 @@ class MovieFragment : Fragment() {
             adapter = movieAdapter
         }
         fmovieProgressBar.visibility = View.GONE
-
-
     }
 
 

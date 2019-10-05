@@ -3,25 +3,18 @@ package com.daya.moviekataloe.view
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.daya.moviekataloe.R
-import com.daya.moviekataloe.repo.room.DatabaseContract.Companion.COLUMN_DESCRIPTION_TV
-import com.daya.moviekataloe.repo.room.DatabaseContract.Companion.COLUMN_ID_TV
-import com.daya.moviekataloe.repo.room.DatabaseContract.Companion.COLUMN_IMAGE_LINK_TV
-import com.daya.moviekataloe.repo.room.DatabaseContract.Companion.COLUMN_NAME_TV
-import com.daya.moviekataloe.repo.room.DatabaseContract.Companion.CONTENT_URI_TV
-import com.daya.moviekataloe.repo.room.DatabaseContract.Companion.TABLE_NAME_TV
 import com.daya.moviekataloe.view.adapter.ViewpagerAdapter
+import com.daya.moviekataloe.view.search.SearchActivity
+import com.daya.moviekataloe.view.settings.SettingsActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.startActivity
 
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
     ViewPager.OnPageChangeListener, AnkoLogger {
@@ -30,32 +23,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val cursor =
-                contentResolver.query(CONTENT_URI_TV, arrayOf(TABLE_NAME_TV), null, null, null)
-
-            val s = cursor?.columnNames
-            cursor?.let {
-
-                while (cursor.moveToNext()) {
-                    val id: Int = it.getInt(it.getColumnIndexOrThrow(COLUMN_ID_TV))
-                    val name: String =
-                        it.getString(it.getColumnIndexOrThrow(COLUMN_NAME_TV))
-
-                    val description: String =
-                        it.getString(it.getColumnIndexOrThrow(COLUMN_DESCRIPTION_TV))
-
-                    val imageLink: String =
-                        it.getString(it.getColumnIndexOrThrow(COLUMN_IMAGE_LINK_TV))
-
-                    Log.d("tag", "$id $name $description $imageLink")
-
-
-                }
-            }
-        }
-
 
         when (val position = mainViewpager.currentItem) {
             0 -> setTitleToolbar(position)
@@ -72,6 +39,8 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             currentItem = 0
             addOnPageChangeListener(this@MainActivity)
         }
+
+
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -124,6 +93,12 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.menu_main_language -> {
                 val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
                 startActivity(intent)
+            }
+            R.id.menu_main_search -> {
+                startActivity<SearchActivity>()
+            }
+            R.id.menu_main_settings -> {
+                startActivity<SettingsActivity>()
             }
         }
         return super.onOptionsItemSelected(item)

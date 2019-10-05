@@ -12,6 +12,7 @@ import com.daya.moviekataloe.repo.room.MovieFavTable
 import com.daya.moviekataloe.repo.room.TvFavTable
 import com.daya.moviekataloe.view.adapter.MediaAdapter.Companion.BASE_URL_IMAGE
 import com.daya.moviekataloe.viewmodel.FavoriteViewModel
+import com.daya.moviekataloe.widget.StackWidgetMovie.Companion.sendRefreshBroadcast
 import com.like.LikeButton
 import com.like.OnLikeListener
 import kotlinx.android.synthetic.main.activity_detail.*
@@ -24,7 +25,6 @@ class DetailActivity : AppCompatActivity() {
     }
 
     private lateinit var source: String
-
     var movie: MovieFavTable? = null
     var tv: TvFavTable? = null
 
@@ -70,6 +70,7 @@ class DetailActivity : AppCompatActivity() {
                         movie?.let {
                             viewModel.addFavoriteMovie(it)
                             toastDetail(it.title, true)
+                            sendRefreshBroadcast(this@DetailActivity)
                         }
                     }
 
@@ -77,6 +78,8 @@ class DetailActivity : AppCompatActivity() {
                         movie?.let {
                             viewModel.deleteFavoriteMovie(it)
                             toastDetail(it.title, false)
+                            sendRefreshBroadcast(this@DetailActivity)
+
                         }
                     }
                 })
@@ -126,5 +129,16 @@ class DetailActivity : AppCompatActivity() {
                 Toast.LENGTH_SHORT
             ).show()
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        movie = null
+        tv = null
     }
 }

@@ -8,4 +8,15 @@
     <string name="this_favorite_still_empty">Ce favori est encore vide</string>
     <string name="tv_favorite">"télévision préférée "</string>
     <string name="title_tab">film préféré</string>
+
+    <string-array name="array_choose_search_type">
+        <item>Search By Movie</item>
+        <item>Search By Tv</item>
+    </string-array>
+    <string name="search_hint_movie">" Rechercher un film"</string>
+    <string name="search_hint_tv">"Recherche TV "</string>
+    <string name="hint_search_toast_movie">"Recherche par film "</string>
+    <string name="hint_search_toast_tv">"Recherche par tv "</string>
+    <string name="dialog_filter_search_title">que cherchez-vous ?</string>
+
 </resources>
