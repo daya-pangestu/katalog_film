@@ -9,7 +9,7 @@ import java.lang.ref.WeakReference
 class FavoriteAdapter(context: Context, fm: FragmentManager, list: List<Fragment>) :
     FragmentPagerAdapter(fm) {
     private var fragment = arrayListOf<Fragment>()
-    var weakContext: WeakReference<Context> = WeakReference(context)
+    private var weakContext: WeakReference<Context> = WeakReference(context)
 
     init {
         this.fragment.addAll(list)

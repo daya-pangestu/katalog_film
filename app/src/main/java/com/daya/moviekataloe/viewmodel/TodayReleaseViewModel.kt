@@ -8,5 +8,4 @@ class TodayReleaseViewModel : ViewModel() {
 
     fun getMovieToday() = repo.getTodayRelMovie()
 
-    fun getTvToday() = repo.getTodayRelTv()
 }

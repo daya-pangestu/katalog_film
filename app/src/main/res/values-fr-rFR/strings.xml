@@ -18,5 +18,12 @@
     <string name="hint_search_toast_movie">"Recherche par film "</string>
     <string name="hint_search_toast_tv">"Recherche par tv "</string>
     <string name="dialog_filter_search_title">que cherchez-vous ?</string>
+    <string name="today_release">sortie aujourd\'hui</string>
+    <string name="setting">Réglage</string>
+    <string name="message_alarm_8">il y a un nouveau film publié aujourd\'hui vérifier sur le film cataloe</string>
+    <string name="message_alarm_7">"Tu me manques, voir le film actuel et la télévision kataloe aujourd'hui  "</string>
+    <string name="favorite_movie_empty">film préféré vide</string>
+    <string name="movie_favorite">Film préféré</string>
+    <string name="search">recherche</string>
 
 </resources>

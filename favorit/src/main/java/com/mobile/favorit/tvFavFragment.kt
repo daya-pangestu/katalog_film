@@ -33,7 +33,7 @@ class tvFavFragment : Fragment() {
         })
     }
 
-    fun initRecyclerViewTv(
+    private fun initRecyclerViewTv(
         tvModel: List<TvFavModel>
     ) {
         val tvAdapter = MediaAdapter(MediaAdapter.TYPE_FAV_TV)

@@ -59,7 +59,6 @@ class DetailActivity : AppCompatActivity() {
 
         when (source) {
             EXTRA_MOVIE -> {
-
                 viewModel.isMovieFavorite(movie?.id!!).observe(this, Observer {
                     detailFavMov.isLiked = it != null
                 })

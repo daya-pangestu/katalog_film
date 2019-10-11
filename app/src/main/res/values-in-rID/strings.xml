@@ -19,5 +19,12 @@
         <item>Search By Movie</item>
         <item>Search By Tv</item>
     </string-array>
+    <string name="message_alarm_7">kangen kamu, lihat film dan tv  kali ini</string>
+    <string name="message_alarm_8">ada film baru yang rilis hari ini cek di movie kataloe</string>
+    <string name="setting">Pengaturan</string>
+    <string name="today_release">rilis hari ini</string>
+    <string name="favorite_movie_empty">film favorit kosong</string>
+    <string name="movie_favorite">Film favorite</string>
+    <string name="search">Cari</string>
 
 </resources>

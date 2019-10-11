@@ -3,16 +3,13 @@ package com.daya.moviekataloe.view.settings
 
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.Fragment
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import com.daya.moviekataloe.R
-import com.google.firebase.messaging.FirebaseMessaging
+import com.daya.moviekataloe.getCurrentDate
+import com.daya.moviekataloe.service.AlarmDailyRepeatingReceiver
+import com.daya.moviekataloe.service.AlarmDailyRepeatingReceiver.Companion.TYPE_REMINDER_AT_8
 
-
-/**
- * A simple [Fragment] subclass.
- */
 class PreferenceFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.layout_preference, rootKey)
@@ -20,33 +17,31 @@ class PreferenceFragment : PreferenceFragmentCompat() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val alarm = AlarmDailyRepeatingReceiver()
         val switchPreference7: SwitchPreferenceCompat? =
-            preferenceManager.findPreference("KEY_SWITH_NOTIF_AT_7")
+            preferenceManager.findPreference(getString(R.string.key_switch_notif_at_7))
         switchPreference7?.setOnPreferenceChangeListener { _, newValue ->
             if (newValue as Boolean) {
-                FirebaseMessaging.getInstance().subscribeToTopic("jam7")
+                alarm.setAlarmAt7(view.context.applicationContext, getCurrentDate())
             } else {
-                FirebaseMessaging.getInstance().unsubscribeFromTopic("jam7")
+                alarm.cancelAlarm(
+                    view.context.applicationContext,
+                    AlarmDailyRepeatingReceiver.TYPE_REMINDER_AT_7
+                )
             }
             true
         }
 
-
         val switchPreference8: SwitchPreferenceCompat? =
-            preferenceManager.findPreference("KEY_SWITH_NOTIF_AT_8")
+            preferenceManager.findPreference(getString(R.string.key_Switch_notif_at_8))
 
         switchPreference8?.setOnPreferenceChangeListener { _, newValue ->
             if (newValue as Boolean) {
-                FirebaseMessaging.getInstance().subscribeToTopic("jam8")
+                alarm.setAlarmAt8(view.context.applicationContext, getCurrentDate())
             } else {
-                FirebaseMessaging.getInstance().unsubscribeFromTopic("jam8")
+                alarm.cancelAlarm(view.context.applicationContext, TYPE_REMINDER_AT_8)
             }
-
             true
         }
-
-
     }
-
 }

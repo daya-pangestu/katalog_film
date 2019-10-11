@@ -16,15 +16,4 @@ class ContainerFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_container, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        /*  val fragmentAdapter = FavoriteAdapter(
-            view.context,
-            childFragmentManager,
-            arrayListOf(movieFavFragment(), tvFavFragment())
-        )
-        viewPager.adapter = fragmentAdapter
-        toolbar.setViewPager(viewPager)
-    }*/
-    }
 }

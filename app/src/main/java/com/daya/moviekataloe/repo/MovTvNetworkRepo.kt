@@ -13,7 +13,7 @@ import retrofit2.Response
 class MovTvNetworkRepo : AnkoLogger {
 
     private val service: ApiService by lazy { ApiClient.getRetrofitClient()!!.create(ApiService::class.java) }
-    private val SearchsService: ApiService by lazy {
+    private val searchsService: ApiService by lazy {
         ApiClient.getRetrofitClientSearch()!!.create(
             ApiService::class.java
         )
@@ -67,7 +67,7 @@ class MovTvNetworkRepo : AnkoLogger {
 
     fun getMovieBysearch(query: String): MutableLiveData<MovieModel> {
         val liveDataListMovie = MutableLiveData<MovieModel>()
-        SearchsService.getSearchMovie(query = query).enqueue(object : Callback<MovieModel> {
+        searchsService.getSearchMovie(query = query).enqueue(object : Callback<MovieModel> {
             override fun onResponse(call: Call<MovieModel>, response: Response<MovieModel>) {
                 if (response.isSuccessful) {
                     val body = response.body()
@@ -84,7 +84,7 @@ class MovTvNetworkRepo : AnkoLogger {
 
     fun getTvBySearch(query: String): MutableLiveData<TvModel> {
         val liveDataListTv = MutableLiveData<TvModel>()
-        SearchsService.getSearchTv(query = query).enqueue(object : Callback<TvModel> {
+        searchsService.getSearchTv(query = query).enqueue(object : Callback<TvModel> {
             override fun onResponse(call: Call<TvModel>, response: Response<TvModel>) {
                 if (response.isSuccessful) {
                     val body = response.body()

@@ -18,16 +18,16 @@ import static com.daya.moviekataloe.repo.room.DatabaseContract.TABLE_NAME_TV;
 
 public class ContentProviderFav extends ContentProvider {
 
-    public static final int MOVIE = 1;
-    public static final int TV = 2;
-    public static final UriMatcher uRiMatcher = new UriMatcher(UriMatcher.NO_MATCH);
+    private static final int MOVIE = 1;
+    private static final int TV = 2;
+    private static final UriMatcher uRiMatcher = new UriMatcher(UriMatcher.NO_MATCH);
 
     static {
-        uRiMatcher.addURI(DatabaseContract.Companion.getAUTHORITY(), TABLE_NAME_MOVIE, MOVIE);
-        uRiMatcher.addURI(DatabaseContract.Companion.getAUTHORITY(), TABLE_NAME_TV, TV);
+        uRiMatcher.addURI(DatabaseContract.AUTHORITY, TABLE_NAME_MOVIE, MOVIE);
+        uRiMatcher.addURI(DatabaseContract.AUTHORITY, TABLE_NAME_TV, TV);
     }
 
-    FavoriteDatabase db;
+    private FavoriteDatabase db;
 
     @Override
     public boolean onCreate() {

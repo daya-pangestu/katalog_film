@@ -3,13 +3,13 @@
 
     <SwitchPreferenceCompat
         android:defaultValue="true"
-        android:key="KEY_SWITH_NOTIF_AT_7"
+        android:key="@string/key_switch_notif_at_7"
         android:summary="pengingat untuk membuka movie kataloe setiap hari"
         android:title="notifikasi jam 7" />
 
     <SwitchPreferenceCompat
         android:defaultValue="true"
-        android:key="KEY_SWITH_NOTIF_AT_8"
+        android:key="@string/key_Switch_notif_at_8"
         android:summary="cek rilis movie / tv tiap harinya"
         android:title="notifikasi jam 8" />
 </PreferenceScreen>

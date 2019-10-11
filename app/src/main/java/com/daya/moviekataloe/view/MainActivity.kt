@@ -10,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.daya.moviekataloe.R
+import com.daya.moviekataloe.getCurrentDate
+import com.daya.moviekataloe.service.AlarmDailyRepeatingReceiver
 import com.daya.moviekataloe.view.adapter.ViewpagerAdapter
 import com.daya.moviekataloe.view.search.SearchActivity
 import com.daya.moviekataloe.view.settings.SettingsActivity
@@ -17,7 +19,6 @@ import com.daya.moviekataloe.view.todayrelease.TodayReleaseActivity
 import com.daya.moviekataloe.viewmodel.PreferenceViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.iid.FirebaseInstanceId
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivity
@@ -53,8 +54,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         }
 
         if (preferenceViewModel.isFirstRun()) {
-            FirebaseMessaging.getInstance().subscribeToTopic("jam7")
-            FirebaseMessaging.getInstance().subscribeToTopic("jam8")
+            val alarmDaily = AlarmDailyRepeatingReceiver()
+            alarmDaily.setAlarmAt7(applicationContext, getCurrentDate())
+            alarmDaily.setAlarmAt8(applicationContext, getCurrentDate())
             preferenceViewModel.setFirstRun(false)
         }
 
@@ -62,9 +64,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             val deviceToken = instanceIdResult.token
             Log.d("tag", "Refreshed token: $deviceToken")
         }
-
     }
-
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {

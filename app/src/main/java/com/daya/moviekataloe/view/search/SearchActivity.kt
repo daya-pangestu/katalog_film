@@ -27,9 +27,11 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
         const val QUERY_BY_TV = 2
     }
 
-    var QUERY_FILTER = QUERY_BY_MOVIE
+    private var QUERY_FILTER = QUERY_BY_MOVIE
 
-    val searchViewModel by lazy { ViewModelProviders.of(this).get(SearchViewModel::class.java) }
+    private val searchViewModel by lazy {
+        ViewModelProviders.of(this).get(SearchViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +68,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                 MaterialDialog(this).show {
                     titleColor = R.color.primaryTextColor
                     title = getString(R.string.dialog_filter_search_title)
-                    listItemsSingleChoice(R.array.array_choose_search_type) { dialog, index, text ->
+                    listItemsSingleChoice(R.array.array_choose_search_type) { _, index, _ ->
                         if (index == 0) {
                             toast(getString(R.string.hint_search_toast_movie))
                             setOnDismissListener {
@@ -78,7 +80,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                                     QUERY_FILTER = QUERY_BY_MOVIE
                                     this@SearchActivity.layoutSearchText.apply {
                                         visibility = View.VISIBLE
-                                        setText(getString(R.string.search_hint_movie))
+                                        text = getString(R.string.search_hint_movie)
                                     }
 
                                     // initRecyclerviewMovie(null)
@@ -96,7 +98,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                                     QUERY_FILTER = QUERY_BY_TV
                                     this@SearchActivity.layoutSearchText.apply {
                                         visibility = View.VISIBLE
-                                        setText(getString(R.string.search_hint_tv))
+                                        text = getString(R.string.search_hint_tv)
                                     }
                                     //  initRecyclerviewTv(null)
                                     this@SearchActivity.actSearchRecyclerview.visibility = View.GONE

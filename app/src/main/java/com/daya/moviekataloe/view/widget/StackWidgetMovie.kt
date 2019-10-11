@@ -37,7 +37,7 @@ class StackWidgetMovie : AppWidgetProvider() {
 
         private const val TOAST_ACTION = "action"
         const val EXTRA_ITEM = "extra_item"
-        private val REFRESH_ACTION = "REFRESH"
+        private const val REFRESH_ACTION = "REFRESH"
 
 
         private fun updateAppWidget(

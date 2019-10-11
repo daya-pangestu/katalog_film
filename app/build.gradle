@@ -39,7 +39,7 @@ dependencies {
 
     implementation "com.paulrybitskyi.persistentsearchview:persistentsearchview:1.1.1"
 
-    implementation "com.google.android.material:material:1.1.0-alpha10"
+    implementation "com.google.android.material:material:1.1.0-beta01"
 
 
     implementation "org.jetbrains.anko:anko:0.10.8"

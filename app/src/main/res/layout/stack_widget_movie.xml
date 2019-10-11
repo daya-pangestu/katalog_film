@@ -27,7 +27,7 @@
             android:background="#09C"
             android:contentDescription="@string/appwidget_text"
             android:gravity="center_horizontal"
-            android:text="Movie Favorite"
+            android:text="@string/movie_favorite"
             android:textColor="#ffffff"
             android:textSize="24sp"
             android:textStyle="bold|italic" />
@@ -40,7 +40,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:background="@color/colorAccent"
-        android:text="favorite movie empty"
+        android:text="@string/favorite_movie_empty"
         android:textAlignment="center"
         android:textColor="#ffffff"
         android:textSize="20sp"

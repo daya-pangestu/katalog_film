@@ -82,12 +82,6 @@ class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapte
         }
     }
 
-    fun clear() {
-        if (movieModel != null) movieModel = null
-        else tvModel = null
-        notifyItemRangeRemoved(0, itemCount)
-    }
-
     inner class ItemHolder(override val containerView: View?) :
         RecyclerView.ViewHolder(containerView!!), LayoutContainer {
 

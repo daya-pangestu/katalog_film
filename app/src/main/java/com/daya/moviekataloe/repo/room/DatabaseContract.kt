@@ -20,15 +20,15 @@ class DatabaseContract {
         const val COLUMN_DESCRIPTION_TV = "description"
         const val COLUMN_IMAGE_LINK_TV = "image_link"
 
-        val AUTHORITY = "com.daya.moviekataloe"
-        val SCHEME = "content"
+        const val AUTHORITY = "com.daya.moviekataloe"
+        private const val SCHEME = "content"
 
-        val CONTENT_URI_MOVIE = Uri.Builder().scheme(SCHEME)
+        val CONTENT_URI_MOVIE: Uri = Uri.Builder().scheme(SCHEME)
             .authority(AUTHORITY)
             .appendPath(TABLE_NAME_MOVIE)
             .build()
 
-        val CONTENT_URI_TV = Uri.Builder().scheme(SCHEME)
+        val CONTENT_URI_TV: Uri = Uri.Builder().scheme(SCHEME)
             .authority(AUTHORITY)
             .appendPath(TABLE_NAME_TV)
             .build()

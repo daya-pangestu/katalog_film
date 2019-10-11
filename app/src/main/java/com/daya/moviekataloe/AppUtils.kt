@@ -20,7 +20,6 @@ fun mapCursorToArrayList(cursor: Cursor): ArrayList<String> {
 fun getCurrentDate(): String {
     val todayDate = Calendar.getInstance().time
     val formatter = SimpleDateFormat("yyyy-MM-dd")
-    val todayString = formatter.format(todayDate)
 
-    return todayString
+    return formatter.format(todayDate)
 }

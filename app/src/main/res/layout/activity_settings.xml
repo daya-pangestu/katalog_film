@@ -4,6 +4,5 @@
     android:id="@+id/act_setting_frame_preference"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.settings.SettingsActivity">
+    tools:context=".view.settings.SettingsActivity" />
 
-</FrameLayout>

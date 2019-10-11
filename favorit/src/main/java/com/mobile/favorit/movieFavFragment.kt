@@ -38,7 +38,7 @@ class movieFavFragment : Fragment() {
     }
 
 
-    fun initRecyclerViewMovie(
+    private fun initRecyclerViewMovie(
         movieModel: List<MovieFavModel>?
     ) {
         val movieAdapter = MediaAdapter(MediaAdapter.TYPE_FAV_MOVIE)
