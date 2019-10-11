@@ -17,6 +17,8 @@ class SettingsActivity : AppCompatActivity(),
         supportFragmentManager.beginTransaction()
             .replace(R.id.act_setting_frame_preference, PreferenceFragment())
             .commit()
+
+
     }
 
 
@@ -33,6 +35,8 @@ class SettingsActivity : AppCompatActivity(),
         caller: PreferenceFragmentCompat?,
         pref: Preference?
     ): Boolean {
+
+
         return true
     }
 }

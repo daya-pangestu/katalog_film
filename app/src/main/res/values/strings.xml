@@ -22,12 +22,20 @@
         <item>Search By Movie</item>
         <item>Search By Tv</item>
     </string-array>
-    <string name="appwidget_text">EXAMPLE</string>
-    <string name="add_widget">Add widget</string>
+    <string name="appwidget_text" translatable="false">EXAMPLE</string>
+    <string name="add_widget" translatable="false">Add widget</string>
     <string name="setting">Setting</string>
+
+
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="subscribe_to_news" translatable="false">Subscribe to news</string>
+    <string name="log_token" translatable="false">Log token</string>
+    <string name="default_notification_channel_name" translatable="false">News</string>
+    <string name="msg_subscribed" translatable="false">Subscribed to news topic</string>
+    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
+    <string name="today_release">today release</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-
 
 </resources>

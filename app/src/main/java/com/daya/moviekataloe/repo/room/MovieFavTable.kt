@@ -16,14 +16,14 @@ import kotlinx.android.parcel.Parcelize
 data class MovieFavTable(
     @PrimaryKey
     @ColumnInfo(index = true, name = COLUMN_ID_MOVIE)
-    val id: Int,
+    val id: Int?,
 
     @ColumnInfo(name = COLUMN_NAME_MOVIE)
-    val title: String,
+    val title: String?,
 
     @ColumnInfo(name = COLUMN_DESCRIPTION_MOVIE)
-    val description: String,
+    val description: String?,
 
     @ColumnInfo(name = COLUMN_IMAGE_LINK_MOVIE)
-    val imageLink: String
+    val imageLink: String?
 ) : Parcelable

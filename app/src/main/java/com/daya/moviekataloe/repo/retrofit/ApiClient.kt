@@ -21,5 +21,15 @@ class ApiClient {
             }
         }
 
+        fun getRetrofitClientSearch(): Retrofit? {
+            return if (retrofit == null) {
+                Retrofit.Builder()
+                    .baseUrl(BASE_URL_SEARCH)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+            } else {
+                retrofit
+            }
+        }
     }
 }

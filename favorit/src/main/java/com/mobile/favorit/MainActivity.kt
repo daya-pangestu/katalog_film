@@ -3,6 +3,7 @@ package com.mobile.favorit
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,13 +16,22 @@ class MainActivity : AppCompatActivity() {
         sharedViewModel = ViewModelProviders.of(this).get(SharedViewModel::class.java)
 
 
-        supportFragmentManager
-            .beginTransaction()
-            .add(
-                R.id.frame_container,
-                ContainerFragment(),
-                ContainerFragment::class.java.simpleName
-            )
-            .commit()
+        /*   supportFragmentManager
+               .beginTransaction()
+               .add(
+                   R.id.frame_container,
+                   ContainerFragment(),
+                   ContainerFragment::class.java.simpleName
+               )
+               .commit()
+   */
+
+        val fragmentAdapter = FavoriteAdapter(
+            this,
+            supportFragmentManager,
+            arrayListOf(movieFavFragment(), tvFavFragment())
+        )
+        viewPager.adapter = fragmentAdapter
+        toolbar.setViewPager(viewPager)
     }
 }

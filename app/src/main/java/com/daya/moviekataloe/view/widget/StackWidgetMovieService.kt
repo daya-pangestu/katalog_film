@@ -1,4 +1,4 @@
-package com.daya.moviekataloe.widget
+package com.daya.moviekataloe.view.widget
 
 import android.content.Intent
 import android.widget.RemoteViewsService

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:defaultValue="true"
         android:key="KEY_SWITH_NOTIF_AT_7"
         android:summary="pengingat untuk membuka movie kataloe setiap hari"
         android:title="notifikasi jam 7" />
 
-    <SwitchPreference
+    <SwitchPreferenceCompat
         android:defaultValue="true"
         android:key="KEY_SWITH_NOTIF_AT_8"
         android:summary="cek rilis movie / tv tiap harinya"

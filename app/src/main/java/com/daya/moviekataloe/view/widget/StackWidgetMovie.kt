@@ -1,4 +1,4 @@
-package com.daya.moviekataloe.widget
+package com.daya.moviekataloe.view.widget
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -69,12 +69,6 @@ class StackWidgetMovie : AppWidgetProvider() {
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
 
-
-        fun sendRefreshBroadcast(context: Context) {
-            val intent = Intent(REFRESH_ACTION)
-            intent.component = ComponentName(context, StackWidgetMovie::class.java)
-            context.sendBroadcast(intent)
-        }
     }
 
     override fun onReceive(context: Context?, intent: Intent?) {

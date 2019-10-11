@@ -27,7 +27,7 @@ class FavoriteContainerFragment : Fragment() {
             arrayListOf(FavoriteMovieFragment(), FavoriteTvFragment())
         )
         fFavoriteViewPager.adapter = fragmentAdapter
-        toolbar.setViewPager(fFavoriteViewPager)
+        toolbar_today_rel.setViewPager(fFavoriteViewPager)
 
     }
 }

@@ -29,6 +29,9 @@ androidExtensions {
 }
 
 dependencies {
+
+    implementation 'com.google.firebase:firebase-analytics:17.2.0'
+
     implementation "androidx.preference:preference-ktx:1.1.0"
 
 
@@ -47,6 +50,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.1.0'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
     def glide_version = "4.10.0"
@@ -78,3 +82,5 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
+
+apply plugin: 'com.google.gms.google-services'

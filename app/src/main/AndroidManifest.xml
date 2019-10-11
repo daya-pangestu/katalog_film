@@ -21,9 +21,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".view.settings.SettingsActivity"></activity>
+        <activity android:name=".view.todayrelease.TodayReleaseActivity"></activity>
+        <activity android:name=".view.settings.SettingsActivity" />
 
-        <receiver android:name=".widget.StackWidgetMovie">
+        <receiver android:name=".view.widget.StackWidgetMovie">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -52,7 +53,7 @@
             android:readPermission="com.daya.moviekataloe.READ_DATABASE"
             android:writePermission="com.daya.moviekataloe.WRITE_DATABASE" />
 
-        <receiver android:name=".widget.StackWidgetMovie">
+        <receiver android:name=".view.widget.StackWidgetMovie">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
             </intent-filter>
@@ -63,8 +64,27 @@
         </receiver>
 
         <service
-            android:name=".widget.StackWidgetMovieService"
+            android:name=".view.widget.StackWidgetMovieService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@mipmap/ic_launcher" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="@string/default_notification_channel_id" />
+
+        <service
+            android:name=".service.FirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

@@ -16,4 +16,10 @@
     <item
         android:id="@+id/menu_main_settings"
         android:title="@string/setting" />
+
+
+    <item
+        android:id="@+id/menu_main_today_release"
+        android:title="@string/today_release" />
+
 </menu>

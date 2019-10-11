@@ -3,26 +3,38 @@ package com.daya.moviekataloe.view
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
 import com.daya.moviekataloe.R
 import com.daya.moviekataloe.view.adapter.ViewpagerAdapter
 import com.daya.moviekataloe.view.search.SearchActivity
 import com.daya.moviekataloe.view.settings.SettingsActivity
+import com.daya.moviekataloe.view.todayrelease.TodayReleaseActivity
+import com.daya.moviekataloe.viewmodel.PreferenceViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.startActivity
 
+
 class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener,
     ViewPager.OnPageChangeListener, AnkoLogger {
 
+    private val preferenceViewModel by lazy {
+        ViewModelProviders.of(this).get(PreferenceViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+
 
         when (val position = mainViewpager.currentItem) {
             0 -> setTitleToolbar(position)
@@ -40,8 +52,19 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             addOnPageChangeListener(this@MainActivity)
         }
 
+        if (preferenceViewModel.isFirstRun()) {
+            FirebaseMessaging.getInstance().subscribeToTopic("jam7")
+            FirebaseMessaging.getInstance().subscribeToTopic("jam8")
+            preferenceViewModel.setFirstRun(false)
+        }
+
+        FirebaseInstanceId.getInstance().instanceId.addOnSuccessListener { instanceIdResult ->
+            val deviceToken = instanceIdResult.token
+            Log.d("tag", "Refreshed token: $deviceToken")
+        }
 
     }
+
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
@@ -60,6 +83,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
                 setTitleToolbar(2)
                 true
             }
+
             else -> false
         }
     }
@@ -100,6 +124,9 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
             R.id.menu_main_settings -> {
                 startActivity<SettingsActivity>()
             }
+            R.id.menu_main_today_release -> {
+                startActivity<TodayReleaseActivity>()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -108,7 +135,7 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         when (position) {
             0 -> supportActionBar?.title = getString(R.string.movie)
             1 -> supportActionBar?.title = getString(R.string.tv)
-            2 -> supportActionBar?.title = "favorite"
+            2 -> supportActionBar?.title = getString(R.string.favorite)
         }
     }
 }

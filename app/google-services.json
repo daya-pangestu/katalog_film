@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "332091277035",
+    "firebase_url": "https://movie-kataloe.firebaseio.com",
+    "project_id": "movie-kataloe",
+    "storage_bucket": "movie-kataloe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:332091277035:android:a7d2289477c60a8490c8ae",
+        "android_client_info": {
+          "package_name": "com.daya.moviekataloe"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "332091277035-3lgob3ogj5o4mdmdk63s1ejj090bt86o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.daya.moviekataloe",
+            "certificate_hash": "d4890ca6c766ed94cbd019f80daac27a7ad7c755"
+          }
+        },
+        {
+          "client_id": "332091277035-6fsovms9bj7msg78jl8gs6krbvdd9psi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3FEFpWcbvFcNyG8v5qP9CphhFu4AsE0I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "332091277035-6fsovms9bj7msg78jl8gs6krbvdd9psi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

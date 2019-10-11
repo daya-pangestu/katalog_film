@@ -1,7 +1,8 @@
-package com.daya.moviekataloe.widget
+package com.daya.moviekataloe.view.widget
 
 import android.content.Context
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.os.Binder
 import android.widget.RemoteViews
@@ -25,8 +26,12 @@ internal class StackRemoteViewsFactoryMovie(private val mContext: Context) :
 
 
     override fun onDataSetChanged() {
+        var cursorMovie: Cursor? = null
+
+        cursorMovie?.close()
+
         val identityToken = Binder.clearCallingIdentity()
-        val cursorMovie = mContext.contentResolver.query(
+        cursorMovie = mContext.contentResolver.query(
             CONTENT_URI_MOVIE,
             arrayOf(TABLE_NAME_MOVIE),
             null,
@@ -37,35 +42,30 @@ internal class StackRemoteViewsFactoryMovie(private val mContext: Context) :
         cursorMovie?.let {
             listMovie.addAll(mapCursorToArrayList(it))
         }
-
-        cursorMovie?.close()
-
         Binder.restoreCallingIdentity(identityToken)
-
-
     }
 
     override fun onDestroy() {
+
     }
-
-
     override fun getCount(): Int = listMovie.size
 
     override fun getViewAt(position: Int): RemoteViews {
         val rv = RemoteViews(mContext.packageName, R.layout.widget_item_movie)
 
-        val listMovieBitmap: List<Bitmap> = listMovie.map {
-            Glide.with(mContext)
+        try {
+
+
+            val movieBitmap: Bitmap = Glide.with(mContext)
                 .asBitmap()
-                .load(BASE_URL_IMAGE + it)
+                .load(BASE_URL_IMAGE + listMovie[position])
                 .submit()
                 .get()
+
+            rv.setImageViewBitmap(R.id.widgetItemImageViewMovie, movieBitmap)
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
-
-
-
-        rv.setImageViewBitmap(R.id.widgetItemImageViewMovie, listMovieBitmap[position])
-
         val extras = bundleOf(
             StackWidgetMovie.EXTRA_ITEM to position
         )
