@@ -63,7 +63,6 @@ class StackWidgetMovie : AppWidgetProvider() {
                 PendingIntent.FLAG_UPDATE_CURRENT
             )
 
-
             views.setPendingIntentTemplate(R.id.stackViewMovie, toastPendingIntent)
 
             appWidgetManager.updateAppWidget(appWidgetId, views)

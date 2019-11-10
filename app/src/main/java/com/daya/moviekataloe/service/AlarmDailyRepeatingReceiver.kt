@@ -12,8 +12,15 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import com.daya.moviekataloe.R
+import com.daya.moviekataloe.model.NotificationItem
+import com.daya.moviekataloe.model.movie.MovieModel
 import com.daya.moviekataloe.view.MainActivity
 import com.daya.moviekataloe.view.todayrelease.TodayReleaseActivity
+import com.daya.moviekataloe.viewmodel.getlistMovieToday
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
@@ -38,7 +45,15 @@ class AlarmDailyRepeatingReceiver : BroadcastReceiver() {
         val notifId = if (type.equals(TYPE_REMINDER_AT_7, ignoreCase = true)) ID_AT_7 else ID_AT_8
 
         message?.let {
-            showAlarmNotification(context, it, notifId)
+
+            if (notifId == ID_AT_7) {
+                showAlarmNotification(context, it, notifId)
+            } else {
+                CoroutineScope(IO).launch {
+                    showAlarmNotification8(context)
+                }
+
+            }
         }
     }
 
@@ -100,7 +115,6 @@ class AlarmDailyRepeatingReceiver : BroadcastReceiver() {
             AlarmManager.INTERVAL_DAY,
             pendingIntent
         )
-
     }
 
     private fun isDateInvalid(date: String, format: String): Boolean {
@@ -126,6 +140,7 @@ class AlarmDailyRepeatingReceiver : BroadcastReceiver() {
             Intent(context, MainActivity::class.java)
         } else {
             Intent(context, TodayReleaseActivity::class.java)
+
         }
 
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -157,6 +172,94 @@ class AlarmDailyRepeatingReceiver : BroadcastReceiver() {
         notificationManagerCompat.notify(notifId, notification)
     }
 
+    private suspend fun showAlarmNotification8(context: Context) {
+        val CHANNEL_ID = "Channel_2"
+        val CHANNEL_NAME = "AlarmManager channel"
+        val GROUP_KEY_EMAILS = "group_key"
+        val MAX_NOTIF = 3
+        val requestID = System.currentTimeMillis().toInt()
+        var idNotif = 0
+
+        val listMovie = CoroutineScope(IO).async {
+            getlistMovie()
+        }
+
+        val data = listMovie.await()
+
+        val listNotif = arrayListOf<NotificationItem>()
+
+        data?.results?.let {
+            it.forEach { result ->
+                listNotif.add(NotificationItem(result.id, result.title))
+            }
+        }
+
+        val notificationManagerCompat =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
+        val intent = Intent(context, TodayReleaseActivity::class.java)
+
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+
+        val pendingIntent =
+            PendingIntent.getActivity(context, requestID, intent, PendingIntent.FLAG_ONE_SHOT)
+        var builder: NotificationCompat.Builder
+        listNotif.let {
+
+            for (i in 0..3) {
+
+                if (idNotif < MAX_NOTIF) {
+                    builder = NotificationCompat.Builder(context, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_history_black_36dp)
+                        .setContentTitle("new Movie Relese Today")
+                        .setContentIntent(pendingIntent)
+                        .setContentText("${it[idNotif].title},released today")
+                        .setColor(ContextCompat.getColor(context, android.R.color.transparent))
+                        .setGroup(GROUP_KEY_EMAILS)
+                        .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
+                        .setSound(alarmSound)
+                        .setAutoCancel(true)
+                    idNotif++
+                } else {
+                    val inboxStyle = NotificationCompat.InboxStyle()
+                        .addLine("New Movie Today :" + listNotif[idNotif].title)
+                        .addLine("New Movie Today :" + listNotif[idNotif - 1].title)
+                        .addLine("New Movie Today :" + listNotif[idNotif - 2].title)
+                        .setBigContentTitle("$idNotif new Movie")
+                        .setSummaryText("new released movie today")
+                    builder = NotificationCompat.Builder(context, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.ic_history_black_36dp)
+                        .setContentTitle("new Movie Relese Today")
+                        .setContentIntent(pendingIntent)
+                        .setContentText(if (idNotif >= 3) "3+ movie,released today" else "$idNotif movie, released today")
+                        .setColor(ContextCompat.getColor(context, android.R.color.transparent))
+                        .setGroup(GROUP_KEY_EMAILS)
+                        .setGroupSummary(true)
+                        .setVibrate(longArrayOf(1000, 1000, 1000, 1000, 1000))
+                        .setSound(alarmSound)
+                        .setStyle(inboxStyle)
+                        .setAutoCancel(true)
+
+                    idNotif++
+                }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val channel = NotificationChannel(
+                        CHANNEL_ID,
+                        CHANNEL_NAME,
+                        NotificationManager.IMPORTANCE_DEFAULT
+                    )
+                    channel.enableVibration(true)
+                    channel.vibrationPattern = longArrayOf(1000, 1000, 1000, 1000, 1000)
+                    builder.setChannelId(CHANNEL_ID)
+                    notificationManagerCompat.createNotificationChannel(channel)
+                }
+                val notification = builder.build()
+                notificationManagerCompat.notify(idNotif, notification)
+            }
+        }
+    }
+
     fun cancelAlarm(context: Context, type: String) {
         val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, AlarmDailyRepeatingReceiver::class.java)
@@ -165,5 +268,10 @@ class AlarmDailyRepeatingReceiver : BroadcastReceiver() {
         val pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0)
         pendingIntent.cancel()
         alarmManager.cancel(pendingIntent)
+    }
+
+
+    suspend fun getlistMovie(): MovieModel? {
+        return getlistMovieToday()
     }
 }

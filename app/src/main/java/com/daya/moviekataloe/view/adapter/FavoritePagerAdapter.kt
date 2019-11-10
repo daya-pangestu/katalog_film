@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.daya.moviekataloe.R
 import java.lang.ref.WeakReference
 
-class FavoriteAdapter(context: Context, fm: FragmentManager, list: List<Fragment>) :
+class FavoritePagerAdapter(context: Context, fm: FragmentManager, list: List<Fragment>) :
     FragmentPagerAdapter(fm) {
     private var fragment = arrayListOf<Fragment>()
     private var weakContext: WeakReference<Context> = WeakReference(context)

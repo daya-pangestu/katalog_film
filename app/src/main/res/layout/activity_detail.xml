@@ -9,46 +9,46 @@
 
     <ImageView
         android:id="@+id/detailImgPoster"
-        android:layout_width="120dp"
+        android:layout_width="135dp"
         android:layout_height="160dp"
-        app:layout_constraintEnd_toEndOf="@id/detailTxtJudul"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintEnd_toStartOf="@+id/detailTxtJudul"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/detailTxtJudul"
-        android:layout_width="100dp"
+        android:layout_width="136dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_toEndOf="@id/detailImgPoster"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/detailImgPoster"
         app:layout_constraintEnd_toStartOf="@+id/detailFavMov"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/detailImgPoster"
         app:layout_constraintTop_toTopOf="@+id/detailImgPoster"
+        app:layout_constraintVertical_bias="0.19999999"
         tools:text="judul" />
 
     <TextView
         android:id="@+id/detailTxtDesc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:maxLines="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/detailFavMov"
         app:layout_constraintStart_toStartOf="@+id/detailImgPoster"
         app:layout_constraintTop_toBottomOf="@+id/detailImgPoster"
         app:layout_constraintVertical_bias="0.1"
+        android:padding="2dp"
         tools:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView" />
 
     <com.like.LikeButton
         android:id="@+id/detailFavMov"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
         app:anim_scale_factor="2.5"
         app:circle_end_color="@color/colorAccent"
         app:circle_start_color="@color/colorAccent"
@@ -56,11 +56,11 @@
         app:dots_secondary_color="@color/colorAccent"
         app:icon_size="36dp"
         app:icon_type="Star"
-        app:layout_constraintBottom_toBottomOf="@+id/detailTxtJudul"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/detailTxtJudul"
-        app:layout_constraintTop_toTopOf="@+id/detailTxtJudul" />
+        app:layout_constraintTop_toTopOf="@+id/detailTxtJudul"
+        tools:src="@drawable/ic_launcher_background" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

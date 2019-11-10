@@ -138,7 +138,7 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                                 hideProgressBar()
                                 showLeftButton()
                             }
-                            toast("data kosong")
+                            toast(getString(R.string.result_empty))
                             actSearchlayoutSearch.visibility = View.VISIBLE
                         }
                     })
@@ -158,9 +158,8 @@ class SearchActivity : AppCompatActivity(), View.OnClickListener {
                                 hideProgressBar()
                                 showLeftButton()
                             }
-                            toast("data kosong")
+                            toast(getString(R.string.result_empty))
                             actSearchlayoutSearch.visibility = View.VISIBLE
-
                         }
                     })
                 }

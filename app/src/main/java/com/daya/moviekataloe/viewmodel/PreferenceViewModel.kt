@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.preference.PreferenceManager
 
 class PreferenceViewModel(application: Application) : AndroidViewModel(application) {
-    private val preference = PreferenceManager.getDefaultSharedPreferences(getApplication())
+    private val preference by lazy { PreferenceManager.getDefaultSharedPreferences(getApplication()) }
 
     companion object {
         const val KEY_FIRST_RUN = "key_first_run"

@@ -23,16 +23,9 @@
         <item>Search By Tv</item>
     </string-array>
     <string name="appwidget_text" translatable="false">EXAMPLE</string>
-    <string name="add_widget" translatable="false">Add widget</string>
     <string name="setting">Setting</string>
 
 
-    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-    <string name="subscribe_to_news" translatable="false">Subscribe to news</string>
-    <string name="log_token" translatable="false">Log token</string>
-    <string name="default_notification_channel_name" translatable="false">News</string>
-    <string name="msg_subscribed" translatable="false">Subscribed to news topic</string>
-    <string name="msg_token_fmt" translatable="false">InstanceID Token: %s</string>
     <string name="today_release">today release</string>
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -43,5 +36,8 @@
     <string name="search">search</string>
     <string name="movie_favorite">Movie Favorite</string>
     <string name="favorite_movie_empty">favorite movie empty</string>
+    <string name="result_empty">Result Empty</string>
+    <string name="added_to_favorite">added to favorite</string>
+    <string name="removed_from_favorite">removed from favorite</string>
 
 </resources>

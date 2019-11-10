@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.daya.moviekataloe.R
-import com.daya.moviekataloe.view.adapter.FavoriteAdapter
+import com.daya.moviekataloe.view.adapter.FavoritePagerAdapter
 import kotlinx.android.synthetic.main.fragment_favorite_conteiner.*
 
 class FavoriteContainerFragment : Fragment() {
@@ -21,7 +21,7 @@ class FavoriteContainerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val fragmentAdapter = FavoriteAdapter(
+        val fragmentAdapter = FavoritePagerAdapter(
             view.context,
             childFragmentManager,
             arrayListOf(FavoriteMovieFragment(), FavoriteTvFragment())

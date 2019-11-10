@@ -25,5 +25,6 @@
     <string name="favorite_movie_empty">film préféré vide</string>
     <string name="movie_favorite">Film préféré</string>
     <string name="search">recherche</string>
+    <string name="result_empty">Result Empty</string>
 
 </resources>

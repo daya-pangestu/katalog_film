@@ -35,8 +35,6 @@ class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemS
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
-
         when (val position = mainViewpager.currentItem) {
             0 -> setTitleToolbar(position)
             1 -> setTitleToolbar(position)

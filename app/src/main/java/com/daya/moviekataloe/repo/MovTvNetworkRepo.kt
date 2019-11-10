@@ -13,12 +13,7 @@ import retrofit2.Response
 class MovTvNetworkRepo : AnkoLogger {
 
     private val service: ApiService by lazy { ApiClient.getRetrofitClient()!!.create(ApiService::class.java) }
-    private val searchsService: ApiService by lazy {
-        ApiClient.getRetrofitClientSearch()!!.create(
-            ApiService::class.java
-        )
-    }
-    
+
     private val getListmovieService by lazy { service.getListMovie() }
     private val getListTvService by lazy { service.getListTv() }
 
@@ -39,6 +34,7 @@ class MovTvNetworkRepo : AnkoLogger {
                 if (response.isSuccessful) {
                     val body = response.body()
                     listMovieLiveData.value = body
+
                 }
             }
 
@@ -67,7 +63,7 @@ class MovTvNetworkRepo : AnkoLogger {
 
     fun getMovieBysearch(query: String): MutableLiveData<MovieModel> {
         val liveDataListMovie = MutableLiveData<MovieModel>()
-        searchsService.getSearchMovie(query = query).enqueue(object : Callback<MovieModel> {
+        service.getSearchMovie(query = query).enqueue(object : Callback<MovieModel> {
             override fun onResponse(call: Call<MovieModel>, response: Response<MovieModel>) {
                 if (response.isSuccessful) {
                     val body = response.body()
@@ -84,7 +80,7 @@ class MovTvNetworkRepo : AnkoLogger {
 
     fun getTvBySearch(query: String): MutableLiveData<TvModel> {
         val liveDataListTv = MutableLiveData<TvModel>()
-        searchsService.getSearchTv(query = query).enqueue(object : Callback<TvModel> {
+        service.getSearchTv(query = query).enqueue(object : Callback<TvModel> {
             override fun onResponse(call: Call<TvModel>, response: Response<TvModel>) {
                 if (response.isSuccessful) {
                     val body = response.body()
@@ -100,41 +96,6 @@ class MovTvNetworkRepo : AnkoLogger {
     }
 
 
-    fun getTodayRelMovie(): MutableLiveData<MovieModel> {
-        val listMovieTodayLiveData = MutableLiveData<MovieModel>()
-        service.getListMovieTodayRel().enqueue(object : Callback<MovieModel> {
-            override fun onResponse(call: Call<MovieModel>, response: Response<MovieModel>) {
-                if (response.isSuccessful) {
-                    val data = response.body()
-                    listMovieTodayLiveData.value = data
-                }
-            }
-
-            override fun onFailure(call: Call<MovieModel>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
-
-        return listMovieTodayLiveData
-    }
-
-    fun getTodayRelTv(): MutableLiveData<TvModel> {
-        val listTvTodayLiveData = MutableLiveData<TvModel>()
-        service.getListTvTodayRel().enqueue(object : Callback<TvModel> {
-            override fun onResponse(call: Call<TvModel>, response: Response<TvModel>) {
-                if (response.isSuccessful) {
-                    val data = response.body()
-                    listTvTodayLiveData.value = data
-                }
-            }
-
-            override fun onFailure(call: Call<TvModel>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
-
-        return listTvTodayLiveData
-    }
-
+    suspend fun getListMovieToday(): MovieModel? = service.getListMovieTodayRel()
 
 }

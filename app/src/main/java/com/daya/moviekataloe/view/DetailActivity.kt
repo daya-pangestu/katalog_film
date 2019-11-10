@@ -6,11 +6,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.bumptech.glide.Glide
 import com.daya.moviekataloe.R
+import com.daya.moviekataloe.loadImageWithGlide
 import com.daya.moviekataloe.repo.room.MovieFavTable
 import com.daya.moviekataloe.repo.room.TvFavTable
-import com.daya.moviekataloe.view.adapter.MediaAdapter.Companion.BASE_URL_IMAGE
 import com.daya.moviekataloe.viewmodel.FavoriteViewModel
 import com.like.LikeButton
 import com.like.OnLikeListener
@@ -32,7 +31,6 @@ class DetailActivity : AppCompatActivity() {
         setContentView(R.layout.activity_detail)
         val viewModel by lazy { ViewModelProviders.of(this).get(FavoriteViewModel::class.java) }
 
-
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
             title = getString(R.string.detail)
@@ -45,14 +43,15 @@ class DetailActivity : AppCompatActivity() {
             movie != null -> {
                 detailTxtJudul.text = movie?.title
                 detailTxtDesc.text = movie?.description
-                Glide.with(this).load(BASE_URL_IMAGE + movie?.imageLink).into(detailImgPoster)
+                detailImgPoster.loadImageWithGlide(movie?.imageLink, context = this@DetailActivity)
                 source = EXTRA_MOVIE
 
             }
             tv != null -> {
                 detailTxtJudul.text = tv?.title
                 detailTxtDesc.text = tv?.description
-                Glide.with(this).load(BASE_URL_IMAGE + tv?.imageLink).into(detailImgPoster)
+                detailImgPoster.loadImageWithGlide(movie?.imageLink, context = this@DetailActivity)
+
                 source = EXTRA_TV
             }
         }
@@ -116,12 +115,12 @@ class DetailActivity : AppCompatActivity() {
         when (setLiked) {
             true -> Toast.makeText(
                 this@DetailActivity,
-                "$text added to favorite",
+                text + getString(R.string.added_to_favorite),
                 Toast.LENGTH_SHORT
             ).show()
             false -> Toast.makeText(
                 this@DetailActivity,
-                "$text removed from favorite",
+                text + getString(R.string.removed_from_favorite),
                 Toast.LENGTH_SHORT
             ).show()
         }

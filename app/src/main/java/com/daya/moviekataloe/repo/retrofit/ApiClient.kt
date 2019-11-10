@@ -5,8 +5,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class ApiClient {
     companion object {
-        private const val BASE_URL = "https://api.themoviedb.org/3/discover/"
-        private const val BASE_URL_SEARCH = " https://api.themoviedb.org/3/search/"
+        private const val BASE_URL = "https://api.themoviedb.org/3/"
+        const val BASE_URL_SEARCH = " https://api.themoviedb.org/3/search/"
 
         private var retrofit: Retrofit? = null
 

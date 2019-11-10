@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.daya.moviekataloe.R
+import com.daya.moviekataloe.loadImageWithGlide
 import com.daya.moviekataloe.model.movie.MovieModel
 import com.daya.moviekataloe.model.tv.TvModel
 import com.daya.moviekataloe.repo.room.MovieFavTable
@@ -19,7 +19,6 @@ import org.jetbrains.anko.startActivity
 
 
 class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapter.ItemHolder>() {
-
 
     companion object {
         const val BASE_URL_IMAGE = "https://image.tmdb.org/t/p/w185"
@@ -88,9 +87,11 @@ class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapte
         fun bindMovie(result: com.daya.moviekataloe.model.movie.Result) {
 
             containerView?.let {
-                Glide.with(it)
-                    .load(BASE_URL_IMAGE + result.poster_path)
-                    .into(itemImgPoster)
+                /*   Glide.with(it)
+                       .load(BASE_URL_IMAGE + result.poster_path)
+                       .into(itemImgPoster)*/
+                itemImgPoster.loadImageWithGlide(result.poster_path, it)
+
             }
 
             fun intentContent(view: View) {
@@ -118,9 +119,12 @@ class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapte
 
         fun bindTv(result: com.daya.moviekataloe.model.tv.Result) {
             containerView?.let {
-                Glide.with(it)
-                    .load(BASE_URL_IMAGE + result.poster_path)
-                    .into(itemImgPoster)
+                /*   Glide.with(it)
+                       .load(BASE_URL_IMAGE + result.poster_path)
+                       .into(itemImgPoster)*/
+                itemImgPoster.loadImageWithGlide(result.poster_path, it)
+
+
             }
 
             itemTxtJudul.text = result.name
@@ -149,9 +153,11 @@ class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapte
 
         fun bindFavMovie(movie: MovieFavTable) {
             containerView?.let {
-                Glide.with(it)
+                /*Glide.with(it)
                     .load(BASE_URL_IMAGE + movie.imageLink)
-                    .into(itemImgPoster)
+                    .into(itemImgPoster)*/
+                itemImgPoster.loadImageWithGlide(movie.imageLink, it)
+
 
                 itemTxtJudul.text = movie.title
                 itemTxtDesc.text = movie.description
@@ -172,9 +178,10 @@ class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapte
 
         fun bindFavTv(tv: TvFavTable) {
             containerView?.let {
-                Glide.with(it)
-                    .load(BASE_URL_IMAGE + tv.imageLink)
-                    .into(itemImgPoster)
+                /* Glide.with(it)
+                     .load(BASE_URL_IMAGE + tv.imageLink)
+                     .into(itemImgPoster)*/
+                itemImgPoster.loadImageWithGlide(tv.imageLink, it)
 
                 itemTxtJudul.text = tv.title
                 itemTxtDesc.text = tv.description
@@ -196,3 +203,5 @@ class MediaAdapter(private var TYPE: String?) : RecyclerView.Adapter<MediaAdapte
         }
     }
 }
+
+

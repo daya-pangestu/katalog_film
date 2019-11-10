@@ -26,5 +26,7 @@
     <string name="favorite_movie_empty">film favorit kosong</string>
     <string name="movie_favorite">Film favorite</string>
     <string name="search">Cari</string>
+    <string name="removed_from_favorite">hapus dari favorit</string>
+    <string name="result_empty">"hasil tidak ditemukan "</string>
 
 </resources>
